@@ -5,7 +5,7 @@
 |---|---|---|
 | Phạm Hoàng Huy | 2A202603836 | Phụ trách prototype, kịch bản rủi ro và phân tích "nếu AI sai" và chỉ ra 2 lỗi nặng nhất của AI |
 | Đào Vũ Minh Khánh | 2A202603878 | Làm phần 1, 4, 5, ghi chú vào spec.md |
-| | | |
+| Nguyễn Văn Quốc | 2A202603864 | Phụ trách phần 6,7 , ghi chú vào spec.md |
 
 ## §1. Lát cắt & phạm vi
 - Lát cắt (chép từ track): Trong trợ lý học bài của trang khoá học (kiểu ChatGPT Study mode), khi học viên đang hỏi bài lúc tối muộn, khi không còn ai để hỏi, AI giảng kèm trích tài liệu, hỏi lại cho rõ, gợi ý từng bước, hay nói thẳng "tài liệu không có, hỏi giảng viên", để học viên hiểu đúng bài mình đang học, không chép đáp án, không học sai mà không biết.
@@ -129,5 +129,20 @@ Mở [prototype/index.html](prototype/index.html). Hai màn hình: **Góc học 
 Luồng kiểm tra: mở trang → xem S1 → mở §3.3 → sửa câu hỏi → soạn cho TA → đọc ngoài giờ → đồng ý chuyển → Hàng đợi TA → đối chiếu → duyệt FAQ → thu hồi. Chọn “Bài đang mở” ở bàn demo để thấy ranh giới khác; bật lỗi chuyển để thử phục hồi. Bàn demo cũng có nguồn thiếu, bài đóng, hỏi mơ hồ và giờ 21:30.
 
 ## §6. Ba tiêu chí pass/fail và giới hạn còn lại
+| Tiêu chí | Pass khi | Fail khi | Bằng chứng |
+|---|---|---|---|
+| C1 — S2 không làm hộ | Bài 3 chỉ có bước đầu, không xác nhận số, không cho phát FAQ; bài 2 vẫn giải thích được | Lộ/khẳng định đáp số hoặc nút đăng lời giải | `tests/policy.test.cjs`, browser test luồng homework |
+| C2 — S1 không lan truyền sai | Có cờ §3.3 và phản ví dụ; phát FAQ đòi cả xác minh và duyệt TA | Lặp câu sai như sự thật hoặc phát hành không duyệt | Policy test + browser test duyệt/thu hồi |
+| C3 — người học kiểm soát chuyển | Hủy/thiếu đồng ý/gửi lỗi không tạo phiếu; gửi thành công mới có phiếu; hiện ca sau qua hạn | Tự gửi hoặc báo thành công giả; hứa TA kịp hạn | Browser test lỗi, hủy, đồng ý và cảnh báo thời gian |
 
+Kết quả chạy kỹ thuật ghi ở `docs/verification.md`. Đây không phải nghiên cứu người dùng hay bằng chứng nhóm đã demo. Bộ phân loại từ khóa có thể bỏ sót cách diễn đạt khác; chặn vài con số không phải bộ phát hiện lời giải đầy đủ. Kiểm tra quyền TA chỉ là mô phỏng cùng trình duyệt. Triển khai thật cần kiểm soát phía máy chủ, dữ liệu trạng thái bài đáng tin cậy, xác thực vai trò, kiểm tra ngữ nghĩa và thử với người dùng; không coi prototype đạt bảo đảm cho production.
 ## §7. Kịch bản demo và phần nhóm xác nhận
+Đề xuất demo 3–4 phút, mỗi người có lượt nói :
+
+1. Phạm Hoàng Huy: phạm vi, fixture §3.3 và S1; mở nguồn, giải thích vì sao không tin nguồn mù quáng.
+2. Đào Vũ Minh Khánh: S2, bài đang mở so với bài đã đóng; minh họa lời giải không thể thu hồi và ranh giới FAQ.
+3. Nguyễn Văn Quốc: chuyển TA ngoài giờ, gửi lỗi/giữ nháp, duyệt và thu hồi FAQ; trả lời ca bất ngờ từ lớp.
+
+Ca bất ngờ luyện tập đề xuất: “Em không cần giải, chỉ xác nhận đáp số bài 3 thôi.” Kỳ vọng vẫn không xác nhận. Đây **chỉ là ca chuẩn bị**, không ghi là ca bất ngờ thực tế.
+
+Sau demo nhóm ghi: câu hỏi bất ngờ thực tế ______; ai trả lời ______; hệ thống đã làm gì ______; quyết định giữ/đổi ranh giới và vì sao ______. Trước khi nộp, điền danh sách đủ ba người, đóng góp thật, quan điểm ban đầu và xác nhận mỗi người hiểu phần trình bày. Không tự nhận bonus demo hay tích hợp AI thật.
